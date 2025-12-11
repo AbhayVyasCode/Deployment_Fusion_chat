@@ -1,0 +1,12 @@
+{
+  "name": "ai-fusion-chat-root",
+  "version": "1.0.0",
+  "description": "Root script for deployment",
+  "scripts": {
+    "build": "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend",
+    "start": "npm start --prefix backend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
