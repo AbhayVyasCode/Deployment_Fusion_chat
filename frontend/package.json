@@ -23,9 +23,7 @@
     "regenerator-runtime": "^0.14.1",
     "socket.io-client": "^4.8.1",
     "tailwind-merge": "^3.4.0",
-    "zustand": "^4.5.2"
-  },
-  "devDependencies": {
+    "zustand": "^4.5.2",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
