@@ -21,5 +21,8 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Add index for searching users
+userSchema.index({ fullName: 1 });
+
 const User = mongoose.model("User", userSchema);
 export default User;

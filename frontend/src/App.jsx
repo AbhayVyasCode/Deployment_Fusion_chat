@@ -227,7 +227,7 @@ function App() {
                 <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
             </div>
         }>
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           <Routes location={location} key={location.pathname}>
             {/* Public Routes */}
             <Route path="/" element={<HomePage />} />

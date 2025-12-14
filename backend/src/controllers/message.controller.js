@@ -1,6 +1,7 @@
 import Message from '../models/message.model.js';
 import { getReceiverSocketId, io } from '../lib/socket.js';
 import { uploadOnCloudinary } from '../lib/cloudinary.js';
+import User from '../models/user.model.js';
 
 // The getUsersForSidebar function has been removed from this file as it's now handled by the friend controller.
 
