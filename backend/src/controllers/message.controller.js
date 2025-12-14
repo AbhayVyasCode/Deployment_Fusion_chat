@@ -37,7 +37,7 @@ export const sendMessage = async (req, res) => {
     }
     
     if (req.file) {
-      const cloudinaryResponse = await uploadOnCloudinary(req.file.path);
+      const cloudinaryResponse = await uploadOnCloudinary(req.file.buffer);
       if (!cloudinaryResponse) {
         return res.status(500).json({ error: 'Failed to upload file to cloud' });
       }

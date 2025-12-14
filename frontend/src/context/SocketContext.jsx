@@ -19,8 +19,11 @@ export const SocketContextProvider = ({ children }) => {
   useEffect(() => {
     // This effect runs whenever the authentication status of the user changes.
     if (authUser) {
+      // Determine the base URL based on the environment
+      const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:8000" : "/";
+      
       // If the user is logged in, create a new socket connection.
-      const newSocket = io('http://localhost:8000', {
+      const newSocket = io(BASE_URL, {
         query: { userId: authUser._id },
         transports: ['websocket', 'polling'], // For increased connection stability
       });

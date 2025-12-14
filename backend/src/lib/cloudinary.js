@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
-import fs from 'fs';
+
 import dotenv from 'dotenv';
 
 dotenv.config(); // <-- This is the crucial fix.
@@ -10,19 +10,21 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const uploadOnCloudinary = async (localFilePath) => {
-  try {
-    if (!localFilePath) return null;
-    const response = await cloudinary.uploader.upload(localFilePath, {
-      resource_type: 'auto',
-    });
-    fs.unlinkSync(localFilePath); // Remove the locally saved temporary file
-    return response;
-  } catch (error) {
-    if (fs.existsSync(localFilePath)) {
-        fs.unlinkSync(localFilePath); // Remove the file on failure as well
-    }
-    console.error("Cloudinary upload error:", error.message);
-    return null;
-  }
+export const uploadOnCloudinary = async (fileBuffer) => {
+  return new Promise((resolve, reject) => {
+    if (!fileBuffer) return resolve(null);
+
+    const uploadStream = cloudinary.uploader.upload_stream(
+      { resource_type: 'auto' },
+      (error, result) => {
+        if (error) {
+          console.error("Cloudinary upload error:", error.message);
+          return resolve(null);
+        }
+        resolve(result);
+      }
+    );
+    
+    uploadStream.end(fileBuffer);
+  });
 };

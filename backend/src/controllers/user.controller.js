@@ -15,16 +15,14 @@ export const updateProfile = async (req, res) => {
     if (req.files) {
       // If a user profile picture is uploaded
       if (req.files.profilePic) {
-        const profilePicLocalPath = req.files.profilePic[0].path;
-        const cloudinaryResponse = await uploadOnCloudinary(profilePicLocalPath);
+        const cloudinaryResponse = await uploadOnCloudinary(req.files.profilePic[0].buffer);
         if (cloudinaryResponse) {
           updateData.profilePic = cloudinaryResponse.secure_url;
         }
       }
       // If an assistant image is uploaded
       if (req.files.assistantImage) {
-        const assistantImageLocalPath = req.files.assistantImage[0].path;
-        const cloudinaryResponse = await uploadOnCloudinary(assistantImageLocalPath);
+        const cloudinaryResponse = await uploadOnCloudinary(req.files.assistantImage[0].buffer);
         if (cloudinaryResponse) {
           updateData.assistantImage = cloudinaryResponse.secure_url;
         }
